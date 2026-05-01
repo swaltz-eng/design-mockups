@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supply Chain - Visual Workflow Design</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8fafc;
+        }
+
+        .header {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1e40af;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: #64748b;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: #1e40af;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-white {
+            background: white;
+            color: #1e40af;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            border: none;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-white:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            border: 2px solid white;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .workflow-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #1e293b;
+        }
+
+        .view-all {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .workflow-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .workflow-card {
+            background: white;
+            border-radius: 16px;
+            padding: 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .workflow-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-color: #3b82f6;
+        }
+
+        .workflow-header {
+            padding: 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .workflow-icon {
+            font-size: 3rem;
+            width: 80px;
+            height: 80px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .workflow-title-area h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .workflow-subtitle {
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        .workflow-body {
+            padding: 2rem;
+        }
+
+        .workflow-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1e293b;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .workflow-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .btn-action {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid #e2e8f0;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #475569;
+            transition: all 0.2s;
+        }
+
+        .btn-action:hover {
+            border-color: #3b82f6;
+            color: #3b82f6;
+            background: #eff6ff;
+        }
+
+        .btn-action.primary {
+            background: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
+        }
+
+        .btn-action.primary:hover {
+            background: #2563eb;
+        }
+
+        .progress-section {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
+            border-radius: 10px;
+            transition: width 0.3s;
+        }
+
+        /* Different color schemes for cards */
+        .workflow-header.blue {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+        }
+
+        .workflow-header.purple {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+        }
+
+        .workflow-header.pink {
+            background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+        }
+
+        .workflow-header.green {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+
+        .workflow-header.orange {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+
+        .workflow-header.teal {
+            background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+        }
+
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .insight-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border-left: 4px solid #3b82f6;
+        }
+
+        .insight-card.warning {
+            border-left-color: #f59e0b;
+            background: #fffbeb;
+        }
+
+        .insight-card.success {
+            border-left-color: #10b981;
+            background: #f0fdf4;
+        }
+
+        .insight-card.info {
+            border-left-color: #3b82f6;
+            background: #eff6ff;
+        }
+
+        .insight-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .insight-title {
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+
+        .insight-description {
+            font-size: 0.9rem;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 1024px) {
+            .workflow-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">
+                🔷 Coupa Supply Chain
+            </div>
+            <div class="header-nav">
+                <a href="#" class="nav-link active">Home</a>
+                <a href="#" class="nav-link">My Work</a>
+                <a href="#" class="nav-link">Analytics</a>
+                <a href="#" class="nav-link">Resources</a>
+                <a href="#" class="nav-link">Settings</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <div class="hero-content">
+                <h1>Your Supply Chain Command Center</h1>
+                <p>Plan, optimize, and execute your supply chain strategy with AI-powered tools</p>
+                <div class="hero-actions">
+                    <button class="btn-white">
+                        <span>🚀</span>
+                        <span>Start New Project</span>
+                    </button>
+                    <button class="btn-outline">View Dashboard</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Insights -->
+        <div class="section-header">
+            <h2 class="section-title">💡 Today's Insights</h2>
+        </div>
+        <div class="insights-grid">
+            <div class="insight-card warning">
+                <div class="insight-icon">⚠️</div>
+                <div class="insight-title">2 Pending Solves</div>
+                <div class="insight-description">You have optimization runs waiting in the queue</div>
+            </div>
+            <div class="insight-card success">
+                <div class="insight-icon">✅</div>
+                <div class="insight-title">98.4% Success Rate</div>
+                <div class="insight-description">Your models are performing exceptionally well this month</div>
+            </div>
+            <div class="insight-card info">
+                <div class="insight-icon">📊</div>
+                <div class="insight-title">New R47 Features</div>
+                <div class="insight-description">Check out sensitivity analysis tracking and more</div>
+            </div>
+            <div class="insight-card success">
+                <div class="insight-icon">⚡</div>
+                <div class="insight-title">12% Faster Solves</div>
+                <div class="insight-description">Your average solve time improved significantly</div>
+            </div>
+        </div>
+
+        <!-- Workflows -->
+        <div class="workflow-section">
+            <div class="section-header">
+                <h2 class="section-title">🎯 Your Workflows</h2>
+                <a href="#" class="view-all">View All →</a>
+            </div>
+            <div class="workflow-grid">
+                <!-- Modeler Card -->
+                <div class="workflow-card">
+                    <div class="workflow-header blue">
+                        <div class="workflow-icon">🔧</div>
+                        <div class="workflow-title-area">
+                            <h3>Network Modeler</h3>
+                            <div class="workflow-subtitle">Optimize supply chain networks</div>
+                        </div>
+                    </div>
+                    <div class="workflow-body">
+                        <div class="workflow-stats">
+                            <div class="stat">
+                                <div class="stat-value">8</div>
+                                <div class="stat-label">Active</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">142</div>
+                                <div class="stat-label">Completed</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">4.2s</div>
+                                <div class="stat-label">Avg Time</div>
+                            </div>
+                        </div>
+                        <div class="workflow-actions">
+                            <button class="btn-action primary">Open</button>
+                            <button class="btn-action">New Model</button>
+                            <button class="btn-action">History</button>
+                        </div>
+                        <div class="progress-section">
+                            <div class="progress-label">
+                                <span>Current Sprint Progress</span>
+                                <span>6/8 Models</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 75%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- App Studio Card -->
+                <div class="workflow-card">
+                    <div class="workflow-header purple">
+                        <div class="workflow-icon">💻</div>
+                        <div class="workflow-title-area">
+                            <h3>App Studio</h3>
+                            <div class="workflow-subtitle">Build custom applications</div>
+                        </div>
+                    </div>
+                    <div class="workflow-body">
+                        <div class="workflow-stats">
+                            <div class="stat">
+                                <div class="stat-value">3</div>
+                                <div class="stat-label">Deployed</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">12</div>
+                                <div class="stat-label">Total Apps</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">2.4K</div>
+                                <div class="stat-label">Users</div>
+                            </div>
+                        </div>
+                        <div class="workflow-actions">
+                            <button class="btn-action primary">Open</button>
+                            <button class="btn-action">Create App</button>
+                            <button class="btn-action">Gallery</button>
+                        </div>
+                        <div class="progress-section">
+                            <div class="progress-label">
+                                <span>App Development</span>
+                                <span>2 In Progress</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 45%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Demand Modeler Card -->
+                <div class="workflow-card">
+                    <div class="workflow-header teal">
+                        <div class="workflow-icon">📈</div>
+                        <div class="workflow-title-area">
+                            <h3>Demand Modeler</h3>
+                            <div class="workflow-subtitle">Forecast with ML models</div>
+                        </div>
+                    </div>
+                    <div class="workflow-body">
+                        <div class="workflow-stats">
+                            <div class="stat">
+                                <div class="stat-value">5</div>
+                                <div class="stat-label">Running</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">94%</div>
+                                <div class="stat-label">Accuracy</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">18</div>
+                                <div class="stat-label">Models</div>
+                            </div>
+                        </div>
+                        <div class="workflow-actions">
+                            <button class="btn-action primary">Open</button>
+                            <button class="btn-action">New Forecast</button>
+                            <button class="btn-action">Reports</button>
+                        </div>
+                        <div class="progress-section">
+                            <div class="progress-label">
+                                <span>Q3 Forecast Progress</span>
+                                <span>Week 8/12</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 67%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Prescriptions Card -->
+                <div class="workflow-card">
+                    <div class="workflow-header green">
+                        <div class="workflow-icon">💊</div>
+                        <div class="workflow-title-area">
+                            <h3>Prescriptions</h3>
+                            <div class="workflow-subtitle">AI-powered recommendations</div>
+                        </div>
+                    </div>
+                    <div class="workflow-body">
+                        <div class="workflow-stats">
+                            <div class="stat">
+                                <div class="stat-value">12</div>
+                                <div class="stat-label">Active</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">$245K</div>
+                                <div class="stat-label">Savings</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">8</div>
+                                <div class="stat-label">Accepted</div>
+                            </div>
+                        </div>
+                        <div class="workflow-actions">
+                            <button class="btn-action primary">Review</button>
+                            <button class="btn-action">Generate</button>
+                            <button class="btn-action">History</button>
+                        </div>
+                        <div class="progress-section">
+                            <div class="progress-label">
+                                <span>Acceptance Rate</span>
+                                <span>67%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 67%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Management Card -->
+                <div class="workflow-card">
+                    <div class="workflow-header orange">
+                        <div class="workflow-icon">📊</div>
+                        <div class="workflow-title-area">
+                            <h3>Data Management</h3>
+                            <div class="workflow-subtitle">Import, transform, analyze</div>
+                        </div>
+                    </div>
+                    <div class="workflow-body">
+                        <div class="workflow-stats">
+                            <div class="stat">
+                                <div class="stat-value">24</div>
+                                <div class="stat-label">Sources</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">1.2M</div>
+                                <div class="stat-label">Records</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">99.8%</div>
+                                <div class="stat-label">Quality</div>
+                            </div>
+                        </div>
+                        <div class="workflow-actions">
+                            <button class="btn-action primary">Open</button>
+                            <button class="btn-action">Import</button>
+                            <button class="btn-action">Flows</button>
+                        </div>
+                        <div class="progress-section">
+                            <div class="progress-label">
+                                <span>Daily Sync</span>
+                                <span>Last: 2 hours ago</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Analytics Card -->
+                <div class="workflow-card">
+                    <div class="workflow-header pink">
+                        <div class="workflow-icon">📉</div>
+                        <div class="workflow-title-area">
+                            <h3>Analytics & Reports</h3>
+                            <div class="workflow-subtitle">Visualize and analyze data</div>
+                        </div>
+                    </div>
+                    <div class="workflow-body">
+                        <div class="workflow-stats">
+                            <div class="stat">
+                                <div class="stat-value">15</div>
+                                <div class="stat-label">Dashboards</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">42</div>
+                                <div class="stat-label">Reports</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">8.2K</div>
+                                <div class="stat-label">Views</div>
+                            </div>
+                        </div>
+                        <div class="workflow-actions">
+                            <button class="btn-action primary">View</button>
+                            <button class="btn-action">Create</button>
+                            <button class="btn-action">Schedule</button>
+                        </div>
+                        <div class="progress-section">
+                            <div class="progress-label">
+                                <span>Report Generation</span>
+                                <span>3 Scheduled Today</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 33%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

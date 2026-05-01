@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Munson Electric - Bold Conversion-Focused Design</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #111827;
+        }
+
+        /* Floating CTA */
+        .floating-cta {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .float-button {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .float-call {
+            background: #10b981;
+            color: white;
+        }
+
+        .float-call:hover {
+            transform: scale(1.1);
+        }
+
+        .float-quote {
+            background: #f59e0b;
+            color: white;
+            width: auto;
+            padding: 0 2rem;
+            border-radius: 35px;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .float-quote:hover {
+            transform: scale(1.05);
+        }
+
+        /* Top Banner */
+        .top-banner {
+            background: #10b981;
+            color: white;
+            padding: 0.75rem 2rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        /* Header */
+        .header {
+            background: #111827;
+            color: white;
+            padding: 1rem 2rem;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #fbbf24;
+            margin-bottom: 0.25rem;
+        }
+
+        .logo-tagline {
+            font-size: 0.9rem;
+            color: #9ca3af;
+        }
+
+        .header-contact {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .phone-number {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #fbbf24;
+            text-decoration: none;
+        }
+
+        .header-cta {
+            background: #f59e0b;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .header-cta:hover {
+            background: #d97706;
+            transform: scale(1.05);
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><rect fill="%231e40af" width="800" height="600"/><circle fill="%233b82f6" opacity="0.3" cx="400" cy="300" r="200"/></svg>');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            background: #10b981;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            display: inline-block;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .hero-highlight {
+            color: #fbbf24;
+        }
+
+        .hero-subheading {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        .hero-form {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 600px;
+            margin: 3rem auto 0;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+
+        .form-title {
+            color: #111827;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-field {
+            width: 100%;
+        }
+
+        .form-field input,
+        .form-field select,
+        .form-field textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .form-field input:focus,
+        .form-field select:focus,
+        .form-field textarea:focus {
+            outline: none;
+            border-color: #f59e0b;
+        }
+
+        .form-submit {
+            width: 100%;
+            background: #f59e0b;
+            color: white;
+            padding: 1.25rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .form-submit:hover {
+            background: #d97706;
+            transform: translateY(-2px);
+        }
+
+        /* Emergency Banner */
+        .emergency-banner {
+            background: #dc2626;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .emergency-phone {
+            color: white;
+            font-size: 2rem;
+            margin: 0.5rem 0;
+            display: block;
+        }
+
+        /* Services Quick Grid */
+        .services-quick {
+            padding: 4rem 2rem;
+            background: #f9fafb;
+        }
+
+        .services-quick-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .services-quick-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .service-quick-card {
+            background: white;
+            padding: 2rem 1rem;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 3px solid transparent;
+        }
+
+        .service-quick-card:hover {
+            transform: translateY(-10px);
+            border-color: #f59e0b;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .service-quick-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-quick-title {
+            font-weight: 700;
+            color: #111827;
+        }
+
+        /* Social Proof */
+        .social-proof {
+            background: #111827;
+            color: white;
+            padding: 3rem 2rem;
+        }
+
+        .social-proof-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 3rem;
+            text-align: center;
+        }
+
+        .proof-stat {
+            border-right: 1px solid #374151;
+        }
+
+        .proof-stat:last-child {
+            border-right: none;
+        }
+
+        .proof-number {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #fbbf24;
+            margin-bottom: 0.5rem;
+        }
+
+        .proof-label {
+            font-size: 1.1rem;
+            color: #d1d5db;
+        }
+
+        /* Before After */
+        .before-after {
+            padding: 5rem 2rem;
+            background: white;
+        }
+
+        .before-after-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title-center {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 3rem;
+        }
+
+        .ba-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .ba-card {
+            background: #f9fafb;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .ba-image {
+            height: 300px;
+            background: linear-gradient(135deg, #3b82f6 0%, #1e3a8a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .ba-content {
+            padding: 2rem;
+        }
+
+        .ba-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Guarantee */
+        .guarantee {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .guarantee-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .guarantee-badge {
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: 50%;
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .guarantee h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .guarantee-features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .guarantee-feature {
+            text-align: center;
+        }
+
+        .guarantee-feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Reviews Slider */
+        .reviews {
+            padding: 5rem 2rem;
+            background: #f9fafb;
+        }
+
+        .reviews-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .review-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-left: 5px solid #fbbf24;
+        }
+
+        .review-stars {
+            color: #fbbf24;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .review-text {
+            font-size: 1.1rem;
+            color: #4b5563;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .review-author-large {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .review-avatar-large {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            font-weight: 700;
+        }
+
+        .review-author-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .review-author-verified {
+            color: #10b981;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        /* Final CTA */
+        .final-cta {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .final-cta h2 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .final-cta-subtext {
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .final-cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        .cta-btn-large {
+            padding: 1.5rem 3rem;
+            font-size: 1.3rem;
+            border-radius: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .cta-btn-orange {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .cta-btn-orange:hover {
+            background: #d97706;
+            transform: scale(1.05);
+        }
+
+        .cta-btn-white {
+            background: white;
+            color: #1e3a8a;
+        }
+
+        .cta-btn-white:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 1024px) {
+            .services-quick-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .ba-grid,
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .social-proof-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .proof-stat {
+                border-right: none;
+                border-bottom: 1px solid #374151;
+                padding-bottom: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-contact {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .floating-cta {
+                bottom: 1rem;
+                right: 1rem;
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating CTA -->
+    <div class="floating-cta">
+        <a href="tel:555-0123" class="float-button float-call">📞</a>
+        <a href="#quote" class="float-button float-quote">FREE QUOTE</a>
+    </div>
+
+    <!-- Top Banner -->
+    <div class="top-banner">
+        ⚡ 24/7 EMERGENCY SERVICE AVAILABLE • CALL NOW: (555) 123-4567
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo">MUNSON ELECTRIC</div>
+                <div class="logo-tagline">Michigan's Trusted Electricians Since 2009</div>
+            </div>
+            <div class="header-contact">
+                <a href="tel:555-0123" class="phone-number">📞 (555) 123-4567</a>
+                <a href="#quote" class="header-cta">GET FREE QUOTE</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">✓ Licensed & Insured • A+ BBB Rating</div>
+            <h1>Expert Electrical Services<br>in <span class="hero-highlight">Metro Detroit</span></h1>
+            <p class="hero-subheading">Same-Day Service • Free Estimates • 100% Satisfaction Guaranteed</p>
+
+            <div class="hero-form" id="quote">
+                <h3 class="form-title">🎁 Get Your FREE Quote Today</h3>
+                <form>
+                    <div class="form-grid">
+                        <div class="form-field">
+                            <input type="text" placeholder="First Name *" required>
+                        </div>
+                        <div class="form-field">
+                            <input type="text" placeholder="Last Name *" required>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-field">
+                            <input type="tel" placeholder="Phone Number *" required>
+                        </div>
+                        <div class="form-field">
+                            <input type="email" placeholder="Email Address *" required>
+                        </div>
+                    </div>
+                    <div class="form-field" style="margin-bottom: 1rem;">
+                        <select required>
+                            <option value="">Select Service Needed *</option>
+                            <option>Residential Electrical</option>
+                            <option>Commercial Electrical</option>
+                            <option>Emergency Repair</option>
+                            <option>Panel Upgrade</option>
+                            <option>Lighting Installation</option>
+                            <option>EV Charging Station</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="form-field" style="margin-bottom: 1rem;">
+                        <textarea placeholder="Brief description of your project..." rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="form-submit">🎯 GET MY FREE QUOTE NOW</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Emergency Banner -->
+    <div class="emergency-banner">
+        🚨 ELECTRICAL EMERGENCY? WE'RE HERE 24/7
+        <a href="tel:555-0123" class="emergency-phone">CALL NOW: (555) 123-4567</a>
+    </div>
+
+    <!-- Services Quick -->
+    <section class="services-quick">
+        <div class="services-quick-content">
+            <h2 class="section-title-center">Our Services</h2>
+            <div class="services-quick-grid">
+                <div class="service-quick-card">
+                    <div class="service-quick-icon">🏠</div>
+                    <div class="service-quick-title">Residential</div>
+                </div>
+                <div class="service-quick-card">
+                    <div class="service-quick-icon">🏢</div>
+                    <div class="service-quick-title">Commercial</div>
+                </div>
+                <div class="service-quick-card">
+                    <div class="service-quick-icon">🚨</div>
+                    <div class="service-quick-title">Emergency</div>
+                </div>
+                <div class="service-quick-card">
+                    <div class="service-quick-icon">⚡</div>
+                    <div class="service-quick-title">Panel Upgrades</div>
+                </div>
+                <div class="service-quick-card">
+                    <div class="service-quick-icon">💡</div>
+                    <div class="service-quick-title">Lighting</div>
+                </div>
+                <div class="service-quick-card">
+                    <div class="service-quick-icon">🔌</div>
+                    <div class="service-quick-title">EV Charging</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof -->
+    <section class="social-proof">
+        <div class="social-proof-content">
+            <div class="proof-stat">
+                <div class="proof-number">15+</div>
+                <div class="proof-label">Years in Business</div>
+            </div>
+            <div class="proof-stat">
+                <div class="proof-number">2,500+</div>
+                <div class="proof-label">Happy Customers</div>
+            </div>
+            <div class="proof-stat">
+                <div class="proof-number">5.0★</div>
+                <div class="proof-label">Google Rating</div>
+            </div>
+            <div class="proof-stat">
+                <div class="proof-number">24/7</div>
+                <div class="proof-label">Emergency Service</div>
+            </div>
+            <div class="proof-stat">
+                <div class="proof-number">100%</div>
+                <div class="proof-label">Satisfaction</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="reviews">
+        <div class="reviews-content">
+            <h2 class="section-title-center">What Our Customers Say</h2>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">"Best electrician I've ever worked with! They upgraded our 100-year-old home's electrical system and everything works perfectly. Professional, clean, and reasonably priced."</p>
+                    <div class="review-author-large">
+                        <div class="review-avatar-large">JD</div>
+                        <div>
+                            <div class="review-author-name">Jennifer Davis</div>
+                            <div class="review-author-verified">✓ Verified Customer • Ann Arbor, MI</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">"Called them for an emergency at 11 PM and they were here within 45 minutes! Fixed our electrical issue quickly and explained everything clearly. Highly recommend!"</p>
+                    <div class="review-author-large">
+                        <div class="review-avatar-large">MR</div>
+                        <div>
+                            <div class="review-author-name">Michael Rodriguez</div>
+                            <div class="review-author-verified">✓ Verified Customer • Detroit, MI</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guarantee -->
+    <section class="guarantee">
+        <div class="guarantee-content">
+            <div class="guarantee-badge">🛡️</div>
+            <h2>Our 100% Satisfaction Guarantee</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">We stand behind every job. If you're not completely satisfied, we'll make it right or your money back.</p>
+
+            <div class="guarantee-features">
+                <div class="guarantee-feature">
+                    <div class="guarantee-feature-icon">✓</div>
+                    <h4>Quality Work</h4>
+                    <p>Code-compliant installations every time</p>
+                </div>
+                <div class="guarantee-feature">
+                    <div class="guarantee-feature-icon">✓</div>
+                    <h4>Fair Pricing</h4>
+                    <p>No hidden fees or surprise charges</p>
+                </div>
+                <div class="guarantee-feature">
+                    <div class="guarantee-feature-icon">✓</div>
+                    <h4>On Time</h4>
+                    <p>We respect your schedule</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <h2>Ready to Get Started?</h2>
+        <p class="final-cta-subtext">Join 2,500+ satisfied customers in Metro Detroit</p>
+        <div class="final-cta-buttons">
+            <a href="#quote" class="cta-btn-large cta-btn-orange">GET FREE QUOTE</a>
+            <a href="tel:555-0123" class="cta-btn-large cta-btn-white">📞 CALL NOW</a>
+        </div>
+    </section>
+</body>
+</html>

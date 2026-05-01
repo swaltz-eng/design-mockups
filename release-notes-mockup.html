@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supply Chain Release Notes - Coupa</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f7fa;
+        }
+
+        .header {
+            background: #fff;
+            border-bottom: 1px solid #e1e4e8;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .breadcrumb {
+            font-size: 0.875rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .breadcrumb a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: #1a1a1a;
+        }
+
+        .page-description {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 0.95rem;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        select {
+            padding: 0.75rem 2.5rem 0.75rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            background: white;
+            font-size: 0.95rem;
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+        }
+
+        .latest-release {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .latest-release h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .badge {
+            background: rgba(255,255,255,0.3);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .latest-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .stat {
+            background: rgba(255,255,255,0.15);
+            padding: 1rem;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .releases {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .release-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border: 1px solid #e5e7eb;
+        }
+
+        .release-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .release-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .release-title h3 {
+            font-size: 1.5rem;
+            color: #1a1a1a;
+        }
+
+        .release-date {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .release-sections {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .section-card {
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 1.25rem;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .section-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 4px 8px rgba(102, 126, 234, 0.1);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-icon {
+            font-size: 1.5rem;
+        }
+
+        .section-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #1a1a1a;
+        }
+
+        .section-count {
+            background: #f3f4f6;
+            color: #666;
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-left: auto;
+        }
+
+        .section-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-link {
+            color: #667eea;
+            font-size: 0.9rem;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .section-link:hover {
+            text-decoration: underline;
+        }
+
+        .quick-links {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 1rem 1.5rem;
+            border-radius: 6px;
+            margin-bottom: 2rem;
+        }
+
+        .quick-links h4 {
+            color: #92400e;
+            margin-bottom: 0.5rem;
+        }
+
+        .quick-links ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .quick-links a {
+            color: #92400e;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .quick-links a:hover {
+            text-decoration: underline;
+        }
+
+        .breaking-changes {
+            background: #fef2f2;
+            border-left: 4px solid #ef4444;
+            padding: 1rem 1.5rem;
+            border-radius: 6px;
+            margin-top: 1rem;
+        }
+
+        .breaking-changes h4 {
+            color: #991b1b;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .breaking-changes ul {
+            list-style: none;
+            color: #7f1d1d;
+        }
+
+        .breaking-changes li {
+            padding: 0.25rem 0;
+        }
+
+        .breaking-changes li:before {
+            content: "⚠️ ";
+            margin-right: 0.5rem;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #e5e7eb;
+            overflow-x: auto;
+        }
+
+        .tab {
+            padding: 0.75rem 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #666;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            white-space: nowrap;
+        }
+
+        .tab.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+
+        .subscribe-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+            text-align: center;
+            border: 2px dashed #d1d5db;
+        }
+
+        .subscribe-section h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .subscribe-section p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .subscribe-form {
+            display: flex;
+            gap: 0.5rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .subscribe-form input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+        }
+
+        .subscribe-form button {
+            padding: 0.75rem 1.5rem;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .subscribe-form button:hover {
+            background: #5568d3;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .latest-stats {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .release-sections {
+                grid-template-columns: 1fr;
+            }
+
+            .controls {
+                flex-direction: column;
+            }
+
+            .search-box {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="#">Coupa Product Documentation</a> ›
+                <a href="#">Supply Chain Design and Planning</a> ›
+                <span>Release Notes</span>
+            </div>
+            <h1>Supply Chain Release Notes</h1>
+            <p class="page-description">Stay up to date with new features, improvements, and bug fixes for Coupa Supply Chain Design & Planning</p>
+        </div>
+    </div>
+
+    <div class="container" style="margin-top: 2rem;">
+        <div class="controls">
+            <div class="search-box">
+                <input type="text" placeholder="Search release notes...">
+            </div>
+            <div class="filter-group">
+                <select>
+                    <option>All Releases</option>
+                    <option selected>R47 (May 2026)</option>
+                    <option>R46 (January 2026)</option>
+                    <option>R45 (October 2025)</option>
+                    <option>R44 (July 2025)</option>
+                </select>
+                <select>
+                    <option>All Types</option>
+                    <option>New Features</option>
+                    <option>Bug Fixes</option>
+                    <option>Breaking Changes</option>
+                    <option>Schema Changes</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="latest-release">
+            <h2>
+                R47 (May 2026)
+                <span class="badge">Latest</span>
+            </h2>
+            <p>The latest release includes powerful new sensitivity analysis tracking, improved solve performance, and critical bug fixes.</p>
+
+            <div class="latest-stats">
+                <div class="stat">
+                    <span class="stat-number">15</span>
+                    <span class="stat-label">New Features</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">48</span>
+                    <span class="stat-label">Bug Fixes</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">3</span>
+                    <span class="stat-label">Breaking Changes</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">12</span>
+                    <span class="stat-label">Schema Updates</span>
+                </div>
+            </div>
+
+            <a href="#r47-details" class="cta-button">View R47 Release Details →</a>
+        </div>
+
+        <div class="quick-links">
+            <h4>🔗 Quick Links</h4>
+            <ul>
+                <li><a href="#">Migration Guide (R46 → R47)</a></li>
+                <li><a href="#">API Changelog</a></li>
+                <li><a href="#">Deprecation Schedule</a></li>
+                <li><a href="#">Known Issues</a></li>
+                <li><a href="#">Subscribe to Updates</a></li>
+            </ul>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active">All Releases</button>
+            <button class="tab">What's New</button>
+            <button class="tab">Breaking Changes</button>
+            <button class="tab">Bug Fixes</button>
+            <button class="tab">Schema Changes</button>
+        </div>
+
+        <div class="releases">
+            <!-- R47 Release -->
+            <div class="release-card" id="r47-details">
+                <div class="release-header">
+                    <div class="release-title">
+                        <h3>Release 47</h3>
+                        <span class="badge" style="background: #667eea; color: white;">Current</span>
+                    </div>
+                    <div class="release-date">Released: May 1, 2026</div>
+                </div>
+
+                <div class="breaking-changes">
+                    <h4>⚠️ Breaking Changes</h4>
+                    <ul>
+                        <li>Sensitivity Analysis solve tracking now requires conversion factor configuration</li>
+                        <li>Legacy "About" dialog version format deprecated - use semantic versioning</li>
+                        <li>Platform Solves report API endpoint updated to v2</li>
+                    </ul>
+                </div>
+
+                <div class="release-sections">
+                    <div class="section-card">
+                        <div class="section-header">
+                            <span class="section-icon">✨</span>
+                            <span class="section-title">New Features</span>
+                            <span class="section-count">15</span>
+                        </div>
+                        <div class="section-description">
+                            Sensitivity analysis tracking, enhanced reporting, and rapid scenario modeling improvements
+                        </div>
+                        <a href="#" class="section-link">View all new features →</a>
+                    </div>
+
+                    <div class="section-card">
+                        <div class="section-header">
+                            <span class="section-icon">🐛</span>
+                            <span class="section-title">Bug Fixes</span>
+                            <span class="section-count">48</span>
+                        </div>
+                        <div class="section-description">
+                            Resolved issues with solve performance, UI rendering, and data synchronization
+                        </div>
+                        <a href="#" class="section-link">View all bug fixes →</a>
+                    </div>
+
+                    <div class="section-card">
+                        <div class="section-header">
+                            <span class="section-icon">📊</span>
+                            <span class="section-title">Database Schema</span>
+                            <span class="section-count">12</span>
+                        </div>
+                        <div class="section-description">
+                            New tables for solve tracking, updated indexes, and performance optimizations
+                        </div>
+                        <a href="#" class="section-link">View schema changes →</a>
+                    </div>
+
+                    <div class="section-card">
+                        <div class="section-header">
+                            <span class="section-icon">⚠️</span>
+                            <span class="section-title">Known Issues</span>
+                            <span class="section-count">5</span>
+                        </div>
+                        <div class="section-description">
+                            Current known issues and workarounds for R47
+                        </div>
+                        <a href="#" class="section-link">View known issues →</a>
+                    </div>
+
+                    <div class="section-card">
+                        <div class="section-header">
+                            <span class="section-icon">🔧</span>
+                            <span class="section-title">Improvements</span>
+                            <span class="section-count">22</span>
+                        </div>
+                        <div class="section-description">
+                            Performance optimizations, UI enhancements, and workflow improvements
+                        </div>
+                        <a href="#" class="section-link">View improvements →</a>
+                    </div>
+
+                    <div class="section-card">
+                        <div class="section-header">
+                            <span class="section-icon">📚</span>
+                            <span class="section-title">Documentation</span>
+                            <span class="section-count">8</span>
+                        </div>
+                        <div class="section-description">
+                            Updated guides, API documentation, and migration instructions
+                        </div>
+                        <a href="#" class="section-link">View documentation →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- R46 Release -->
+            <div class="release-card">
+                <div class="release-header">
+                    <div class="release-title">
+                        <h3>Release 46</h3>
+                    </div>
+                    <div class="release-date">Released: January 15, 2026</div>
+                </div>
+
+                <div class="release-sections">
+                    <div class="section-card">
+                        <div class="section-header">
+                            <span class="section-icon">✨</span>
+                            <span class="section-title">New Features</span>
+                            <span class="section-count">12</span>
+                        </div>
+                        <div class="section-description">
+                            SCGX version display updates, Data Guru project integration, and copyright year updates
+                        </div>
+                        <a href="#" class="section-link">View all new features →</a>
+                    </div>
+
+                    <div class="section-card">
+                        <div class="section-header">
+                            <span class="section-icon">🐛</span>
+                            <span class="section-title">Bug Fixes</span>
+                            <span class="section-count">35</span>
+                        </div>
+                        <div class="section-description">
+                            Fixed issues with About dialog, version numbering, and project imports
+                        </div>
+                        <a href="#" class="section-link">View all bug fixes →</a>
+                    </div>
+
+                    <div class="section-card">
+                        <div class="section-header">
+                            <span class="section-icon">📊</span>
+                            <span class="section-title">Database Schema</span>
+                            <span class="section-count">8</span>
+                        </div>
+                        <div class="section-description">
+                            Updated project metadata tables and version tracking fields
+                        </div>
+                        <a href="#" class="section-link">View schema changes →</a>
+                    </div>
+
+                    <div class="section-card">
+                        <div class="section-header">
+                            <span class="section-icon">⚠️</span>
+                            <span class="section-title">Known Issues</span>
+                            <span class="section-count">3</span>
+                        </div>
+                        <div class="section-description">
+                            Current known issues and workarounds for R46
+                        </div>
+                        <a href="#" class="section-link">View known issues →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- R45 Release -->
+            <div class="release-card">
+                <div class="release-header">
+                    <div class="release-title">
+                        <h3>Release 45</h3>
+                    </div>
+                    <div class="release-date">Released: October 2, 2025</div>
+                </div>
+
+                <div class="release-sections">
+                    <div class="section-card">
+                        <div class="section-header">
+                            <span class="section-icon">✨</span>
+                            <span class="section-title">New Features</span>
+                            <span class="section-count">18</span>
+                        </div>
+                        <div class="section-description">
+                            Major improvements to scenario modeling and optimization algorithms
+                        </div>
+                        <a href="#" class="section-link">View all new features →</a>
+                    </div>
+
+                    <div class="section-card">
+                        <div class="section-header">
+                            <span class="section-icon">🐛</span>
+                            <span class="section-title">Bug Fixes</span>
+                            <span class="section-count">42</span>
+                        </div>
+                        <div class="section-description">
+                            Critical fixes for solve stability and data integrity
+                        </div>
+                        <a href="#" class="section-link">View all bug fixes →</a>
+                    </div>
+
+                    <div class="section-card">
+                        <div class="section-header">
+                            <span class="section-icon">📊</span>
+                            <span class="section-title">Database Schema</span>
+                            <span class="section-count">15</span>
+                        </div>
+                        <div class="section-description">
+                            Major schema refactoring for improved performance
+                        </div>
+                        <a href="#" class="section-link">View schema changes →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="subscribe-section">
+            <h3>📬 Stay Updated</h3>
+            <p>Get notified when new releases are published</p>
+            <div class="subscribe-form">
+                <input type="email" placeholder="Enter your email">
+                <button>Subscribe</button>
+            </div>
+        </div>
+    </div>
+
+    <div style="height: 4rem;"></div>
+</body>
+</html>
