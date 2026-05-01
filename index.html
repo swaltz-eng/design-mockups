@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design Mockups - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: white;
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .subtitle {
+            color: rgba(255,255,255,0.9);
+            text-align: center;
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            padding-left: 1rem;
+            border-left: 4px solid #fbbf24;
+        }
+
+        .mockups-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .mockup-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+        }
+
+        .mockup-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+        }
+
+        .mockup-preview {
+            height: 200px;
+            background: linear-gradient(135deg, #3b82f6 0%, #1e3a8a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+        }
+
+        .mockup-content {
+            padding: 2rem;
+        }
+
+        .mockup-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #1f2937;
+        }
+
+        .mockup-description {
+            color: #6b7280;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .mockup-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: #eff6ff;
+            color: #1e40af;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .mockup-link {
+            display: inline-block;
+            background: #3b82f6;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .mockup-link:hover {
+            background: #2563eb;
+            transform: scale(1.05);
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .mockups-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Design Mockups Portfolio</h1>
+        <p class="subtitle">Modern website redesign concepts</p>
+
+        <!-- Munson Electric -->
+        <div class="section">
+            <h2 class="section-title">⚡ Munson Electric LLC</h2>
+            <div class="mockups-grid">
+                <div class="mockup-card">
+                    <div class="mockup-preview" style="background: linear-gradient(135deg, #3b82f6 0%, #1e3a8a 100%);">🏠</div>
+                    <div class="mockup-content">
+                        <h3 class="mockup-title">Modern Professional</h3>
+                        <p class="mockup-description">Clean, trustworthy design with testimonials and service cards. Perfect for established businesses.</p>
+                        <div class="mockup-tags">
+                            <span class="tag">Professional</span>
+                            <span class="tag">Trust-focused</span>
+                            <span class="tag">Clean</span>
+                        </div>
+                        <a href="munson-electric-v1-modern-professional.html" class="mockup-link">View Design →</a>
+                    </div>
+                </div>
+
+                <div class="mockup-card">
+                    <div class="mockup-preview" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">📞</div>
+                    <div class="mockup-content">
+                        <h3 class="mockup-title">Bold Conversion-Focused</h3>
+                        <p class="mockup-description">Aggressive lead generation with floating CTAs and hero form. Optimized for phone calls and conversions.</p>
+                        <div class="mockup-tags">
+                            <span class="tag">High-Converting</span>
+                            <span class="tag">Lead Generation</span>
+                            <span class="tag">Bold</span>
+                        </div>
+                        <a href="munson-electric-v2-bold-conversion.html" class="mockup-link">View Design →</a>
+                    </div>
+                </div>
+
+                <div class="mockup-card">
+                    <div class="mockup-preview" style="background: linear-gradient(135deg, #1e3a8a 0%, #fbbf24 100%);">👨‍👩‍👧‍👦</div>
+                    <div class="mockup-content">
+                        <h3 class="mockup-title">Heritage Authentic ⭐</h3>
+                        <p class="mockup-description">Emphasizes 4th generation family business story. Warm, trustworthy, and community-focused.</p>
+                        <div class="mockup-tags">
+                            <span class="tag">Recommended</span>
+                            <span class="tag">Family Business</span>
+                            <span class="tag">Authentic</span>
+                        </div>
+                        <a href="munson-electric-v3-heritage-authentic.html" class="mockup-link">View Design →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Supply Chain -->
+        <div class="section">
+            <h2 class="section-title">🔷 Supply Chain Design & Planning</h2>
+            <div class="mockups-grid">
+                <div class="mockup-card">
+                    <div class="mockup-preview" style="background: linear-gradient(135deg, #2c5282 0%, #3182ce 100%);">📊</div>
+                    <div class="mockup-content">
+                        <h3 class="mockup-title">Task-Focused Design</h3>
+                        <p class="mockup-description">Dashboard with key stats, tools grid, and recent activity. Optimized for quick access to work.</p>
+                        <div class="mockup-tags">
+                            <span class="tag">Dashboard</span>
+                            <span class="tag">Power Users</span>
+                            <span class="tag">Efficient</span>
+                        </div>
+                        <a href="supply-chain-home-v1-task-focused.html" class="mockup-link">View Design →</a>
+                    </div>
+                </div>
+
+                <div class="mockup-card">
+                    <div class="mockup-preview" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">🎯</div>
+                    <div class="mockup-content">
+                        <h3 class="mockup-title">Visual Workflow Design</h3>
+                        <p class="mockup-description">Beautiful workflow cards with stats and progress tracking. Engaging interface for all users.</p>
+                        <div class="mockup-tags">
+                            <span class="tag">Beautiful</span>
+                            <span class="tag">Engaging</span>
+                            <span class="tag">Modern</span>
+                        </div>
+                        <a href="supply-chain-home-v2-visual-workflow.html" class="mockup-link">View Design →</a>
+                    </div>
+                </div>
+
+                <div class="mockup-card">
+                    <div class="mockup-preview" style="background: #18181b;">⚡</div>
+                    <div class="mockup-content">
+                        <h3 class="mockup-title">Minimal Modern Design</h3>
+                        <p class="mockup-description">Dark sidebar navigation with clean metrics and project tracking. Professional and efficient.</p>
+                        <div class="mockup-tags">
+                            <span class="tag">Minimal</span>
+                            <span class="tag">Dark Theme</span>
+                            <span class="tag">Professional</span>
+                        </div>
+                        <a href="supply-chain-home-v3-minimal-modern.html" class="mockup-link">View Design →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Release Notes -->
+        <div class="section">
+            <h2 class="section-title">📝 Release Notes</h2>
+            <div class="mockups-grid">
+                <div class="mockup-card">
+                    <div class="mockup-preview" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">📋</div>
+                    <div class="mockup-content">
+                        <h3 class="mockup-title">Modern Release Notes</h3>
+                        <p class="mockup-description">Improved organization with filters, search, and visual hierarchy. Latest release highlighted.</p>
+                        <div class="mockup-tags">
+                            <span class="tag">Documentation</span>
+                            <span class="tag">Organized</span>
+                            <span class="tag">Searchable</span>
+                        </div>
+                        <a href="release-notes-mockup.html" class="mockup-link">View Design →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Created with Claude Code • 2026</p>
+        </div>
+    </div>
+</body>
+</html>
