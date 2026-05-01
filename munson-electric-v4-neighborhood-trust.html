@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Munson Electric LLC - Neighborhood Trust Concept | Ann Arbor Electricians</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #f6f7fb;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .top-strip {
+            background: #0f2a55;
+            color: #e5eefc;
+            font-size: 0.92rem;
+            padding: 0.65rem 0;
+        }
+
+        .top-strip .container {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .site-header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            z-index: 20;
+        }
+
+        .header-row {
+            min-height: 84px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .brand {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+
+        .brand-title {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #0f2a55;
+            letter-spacing: 0.02em;
+        }
+
+        .brand-tag {
+            font-size: 0.88rem;
+            color: #4b5563;
+            font-weight: 600;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 1.25rem;
+            align-items: center;
+        }
+
+        .header-nav a {
+            color: #374151;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .header-nav a:hover {
+            color: #0f2a55;
+        }
+
+        .phone-pill {
+            text-decoration: none;
+            background: #ffb11b;
+            color: #0f172a;
+            font-weight: 800;
+            padding: 0.85rem 1.25rem;
+            border-radius: 999px;
+            border: 2px solid #f59e0b;
+            white-space: nowrap;
+        }
+
+        .hero {
+            padding: 4.5rem 0 3.5rem;
+            background:
+                radial-gradient(circle at 82% 10%, rgba(255, 177, 27, 0.25), transparent 35%),
+                linear-gradient(145deg, #0f2a55 0%, #1b4b93 70%, #2d67bb 100%);
+            color: #ffffff;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            padding: 0.4rem 0.9rem;
+            border-radius: 999px;
+            font-size: 0.86rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.25rem);
+            line-height: 1.08;
+            margin-bottom: 1rem;
+            max-width: 15ch;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            max-width: 52ch;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 0.9rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.95rem 1.3rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 800;
+        }
+
+        .btn-primary {
+            background: #ffb11b;
+            color: #111827;
+        }
+
+        .btn-secondary {
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            color: #ffffff;
+        }
+
+        .hero-card {
+            background: #ffffff;
+            color: #1f2937;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 18px 45px rgba(4, 17, 37, 0.35);
+        }
+
+        .hero-card h3 {
+            color: #0f2a55;
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
+        }
+
+        .hero-list {
+            list-style: none;
+            display: grid;
+            gap: 0.7rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-list li {
+            border-bottom: 1px dashed #d1d5db;
+            padding-bottom: 0.6rem;
+            font-size: 0.97rem;
+        }
+
+        .hero-card .small {
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+
+        .section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            font-size: clamp(1.65rem, 3vw, 2.35rem);
+            color: #0f2a55;
+            margin-bottom: 0.7rem;
+        }
+
+        .section-sub {
+            color: #4b5563;
+            margin-bottom: 2rem;
+            max-width: 64ch;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .service {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 1.2rem;
+        }
+
+        .service h4 {
+            color: #0f2a55;
+            margin-bottom: 0.5rem;
+            font-size: 1.08rem;
+        }
+
+        .service p {
+            color: #4b5563;
+            font-size: 0.96rem;
+        }
+
+        .process-wrap {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 1.3rem;
+        }
+
+        .process {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 0.8rem;
+        }
+
+        .step {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1rem;
+        }
+
+        .step .num {
+            display: inline-block;
+            width: 1.7rem;
+            height: 1.7rem;
+            border-radius: 999px;
+            text-align: center;
+            font-weight: 800;
+            line-height: 1.7rem;
+            background: #dbeafe;
+            color: #1e3a8a;
+            margin-bottom: 0.55rem;
+        }
+
+        .step h4 {
+            margin-bottom: 0.35rem;
+            color: #111827;
+            font-size: 1rem;
+        }
+
+        .step p {
+            color: #4b5563;
+            font-size: 0.92rem;
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .trust-item {
+            background: linear-gradient(160deg, #ffffff, #f9fafb);
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1rem;
+        }
+
+        .trust-item h4 {
+            color: #0f2a55;
+            margin-bottom: 0.4rem;
+            font-size: 1rem;
+        }
+
+        .trust-item p {
+            font-size: 0.92rem;
+            color: #4b5563;
+        }
+
+        .cta {
+            background: linear-gradient(140deg, #0f2a55 0%, #1d4d96 100%);
+            color: #ffffff;
+            border-radius: 16px;
+            padding: 2.2rem;
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .cta h3 {
+            font-size: 1.6rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .footer {
+            border-top: 1px solid #e5e7eb;
+            padding: 2.2rem 0 3rem;
+            color: #4b5563;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 980px) {
+            .hero-grid,
+            .services-grid,
+            .process,
+            .trust-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-row {
+                flex-wrap: wrap;
+                justify-content: center;
+                padding: 1rem 0;
+            }
+
+            .header-nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .cta {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-strip">
+        <div class="container">
+            <div>Ann Arbor, Ypsilanti, Saline, and nearby communities</div>
+            <div>Family-owned since 1970 | Licensed and insured</div>
+        </div>
+    </div>
+
+    <header class="site-header">
+        <div class="container header-row">
+            <div class="brand">
+                <div class="brand-title">MUNSON ELECTRIC LLC</div>
+                <div class="brand-tag">Fourth Generation Electricians</div>
+            </div>
+            <nav class="header-nav">
+                <a href="#services">Services</a>
+                <a href="#process">How It Works</a>
+                <a href="#trust">Why Neighbors Choose Us</a>
+                <a href="tel:734-323-9290" class="phone-pill">Call (734) 323-9290</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-grid">
+            <div>
+                <span class="badge">Fast scheduling for local homeowners</span>
+                <h1>Reliable Home Electrical Work Without the Guesswork</h1>
+                <p>
+                    This concept spotlights practical homeowner priorities: fast response, clear communication,
+                    and trusted local craftsmanship from a fourth-generation Ann Arbor electrician team.
+                </p>
+                <div class="hero-actions">
+                    <a class="btn btn-primary" href="tel:734-323-9290">Get a Same-Day Call Back</a>
+                    <a class="btn btn-secondary" href="#process">See the 4-Step Process</a>
+                </div>
+            </div>
+            <aside class="hero-card" aria-label="Highlights card">
+                <h3>What Homeowners Care About Most</h3>
+                <ul class="hero-list">
+                    <li><strong>Clear pricing:</strong> upfront scope and options before work begins.</li>
+                    <li><strong>Dependable arrival:</strong> no confusing appointment windows.</li>
+                    <li><strong>Clean, safe work:</strong> respectful technicians and code-first installs.</li>
+                    <li><strong>Direct contact:</strong> call and speak with a real local team member.</li>
+                </ul>
+                <p class="small">Concept theme: "Neighborhood Trust + Scheduling Simplicity"</p>
+            </aside>
+        </div>
+    </section>
+
+    <section class="section" id="services">
+        <div class="container">
+            <h2 class="section-title">Core Residential Services</h2>
+            <p class="section-sub">
+                Designed for scanability on mobile: concise service cards with practical language
+                that helps homeowners quickly confirm fit.
+            </p>
+            <div class="services-grid">
+                <article class="service">
+                    <h4>Panel Upgrades and Repairs</h4>
+                    <p>Improve safety, add capacity for modern appliances, and fix recurring breaker issues.</p>
+                </article>
+                <article class="service">
+                    <h4>Lighting and Rewiring</h4>
+                    <p>Interior, exterior, and functional upgrades for kitchens, basements, and remodel projects.</p>
+                </article>
+                <article class="service">
+                    <h4>Electrical Troubleshooting</h4>
+                    <p>Find root causes quickly with experienced diagnostics and reliable corrective work.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="process">
+        <div class="container">
+            <h2 class="section-title">Simple 4-Step Customer Journey</h2>
+            <p class="section-sub">
+                This section is intentionally process-oriented to reduce uncertainty and support conversion.
+            </p>
+            <div class="process-wrap">
+                <div class="process">
+                    <div class="step">
+                        <span class="num">1</span>
+                        <h4>Call or Request</h4>
+                        <p>Share your issue and preferred timing with our local office.</p>
+                    </div>
+                    <div class="step">
+                        <span class="num">2</span>
+                        <h4>Confirm Scope</h4>
+                        <p>We review details, explain options, and align on a clear plan.</p>
+                    </div>
+                    <div class="step">
+                        <span class="num">3</span>
+                        <h4>Professional Service</h4>
+                        <p>Work is completed safely, cleanly, and to current code standards.</p>
+                    </div>
+                    <div class="step">
+                        <span class="num">4</span>
+                        <h4>Final Walkthrough</h4>
+                        <p>We confirm satisfaction and answer any remaining questions before closing out.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="trust">
+        <div class="container">
+            <h2 class="section-title">Built Around Local Trust Signals</h2>
+            <p class="section-sub">
+                Instead of heavy marketing language, this concept emphasizes practical trust points that
+                resonate with long-term homeowners and families.
+            </p>
+            <div class="trust-grid">
+                <article class="trust-item">
+                    <h4>Fourth-Generation Craftsmanship</h4>
+                    <p>Established family legacy serving Ann Arbor homes since 1970.</p>
+                </article>
+                <article class="trust-item">
+                    <h4>Clear Communication</h4>
+                    <p>Expect straightforward guidance, prompt updates, and realistic timelines.</p>
+                </article>
+                <article class="trust-item">
+                    <h4>Community-First Reputation</h4>
+                    <p>Designed to highlight neighbor referrals and repeat customers as social proof.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="cta" id="contact">
+            <div>
+                <h3>Need an electrician you can trust?</h3>
+                <p>Call today for responsive scheduling and dependable residential service.</p>
+            </div>
+            <a class="btn btn-primary" href="tel:734-323-9290">Call (734) 323-9290</a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p><strong>Munson Electric LLC</strong> | Ann Arbor, Michigan | munsonelectricllc@gmail.com</p>
+            <p>Mockup concept v4: Neighborhood Trust + Scheduling Simplicity</p>
+        </div>
+    </footer>
+</body>
+</html>
